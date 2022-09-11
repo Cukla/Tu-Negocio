@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Tu Negocio (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Tu Negocio (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
