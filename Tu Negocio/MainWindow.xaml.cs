@@ -6,26 +6,47 @@ using System;
 using WinRT.Interop;
 using Tu_Negocio.Entities;
 using Tu_Negocio.Json;
+using Tu_Negocio.Pages;
 
 namespace Tu_Negocio
 {
     public sealed partial class MainWindow : Window
     {
+        public AppViewModel ViewModel { get; set; } = new AppViewModel();
+        public static MainWindow Current { get; set; }
+
         private AppWindow m_AppWindow;
-        Business SelectedBusiness;
-        StorageManager dataStorage = new StorageManager("La Casa de Juguetes");
+        Settings settings;
+        StorageManager dataStorage = new StorageManager();
 
         public MainWindow()
         {
             this.InitializeComponent();
-
+            Current = this;
             m_AppWindow = GetAppWindowForCurrentWindow();
-            m_AppWindow.Title = "Tu Negocio";
-            Expenditure expenditure = new Expenditure();
-            if (SelectedBusiness == null)
-            {
 
+
+            if (dataStorage.ReadSettingsFile(ref settings) && settings.SelectedBusinessName != "No Business Selected")
+            {
+                dataStorage = new StorageManager(settings.SelectedBusinessName);
+                dataStorage.GetSelectedBusiness(settings.SelectedBusinessName);
             }
+            else
+            {
+                dataStorage.CreateSettingsFile();
+                RegBusinessDialog.Visibility = Visibility.Visible;
+
+                dataStorage.ReadSettingsFile(ref settings);
+                SetBusiness();
+            }
+
+            MainNv.PaneTitle = ViewModel.SelectedBusiness.Data.Name;
+            m_AppWindow.Title = ViewModel.SelectedBusiness.Data.Name;
+        }
+
+        private void SetBusiness()
+        {
+            dataStorage = new StorageManager(settings.SelectedBusinessName);
         }
 
         private AppWindow GetAppWindowForCurrentWindow()
@@ -58,6 +79,7 @@ namespace Tu_Negocio
             provider.Name = PNameTb.Text;
             provider.TelNum = PtelTb.Text;
             provider.Dir = PDirTb.Text;
+            provider.City = PCityTb.Text;
             provider.DNI = PDniTb.Text;
             provider.Cuit = PCuitTb.Text;
             provider.Adi = PAdiTb.Text;
@@ -69,6 +91,7 @@ namespace Tu_Negocio
         private void RegBusiness()
         {
             Business bus = new Business();
+            bus.Data = new BusinessData();
 
             bus.Data.Name = BNameTb.Text;
             bus.Data.TelNum = BtelTb.Text;
@@ -80,7 +103,14 @@ namespace Tu_Negocio
             DateTimeOffset offset = (DateTimeOffset)BFundDateDp.Date;
             bus.Data.FundationDate = offset.UtcDateTime;
 
-            dataStorage.SaveBussines(bus.Data);
+            dataStorage.SaveBussines();
+
+            ViewModel.SelectedBusiness = bus;
+            settings.SelectedBusinessName = bus.Data.Name;
+            SetBusiness();
+            dataStorage.ModifySettingsFile(ref settings);
+            MainNv.PaneTitle = ViewModel.SelectedBusiness.Data.Name;
+            m_AppWindow.Title = ViewModel.SelectedBusiness.Data.Name;
         }
 
         #region Navigation
@@ -163,5 +193,32 @@ namespace Tu_Negocio
         {
             RegProviderDialog.Visibility = Visibility.Collapsed;
         }
+
+        private void CommitCategory_Click(object sender, RoutedEventArgs e)
+        {
+            settings.Categories.Add(CategoryNameTb.Text);
+            dataStorage.WriteCategories(settings.Categories);
+        }
+
+        private void OpenCategoryDialog_Click(object sender, RoutedEventArgs e)
+        {
+            AddCategoryDialog.Visibility = Visibility.Visible;
+        }
+
+        private void OpenProductDialog_Click(object sender, RoutedEventArgs e)
+        {
+            RegProDialog.Visibility = Visibility.Visible;
+        }
+
+        private void HideCaDialogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddCategoryDialog.Visibility = Visibility.Collapsed;
+        }
+
+        private void HideProDialogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RegProDialog.Visibility = Visibility.Collapsed;
+        }
+
     }
 }

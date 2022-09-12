@@ -12,5 +12,6 @@ namespace Tu_Negocio.Entities
         public string Cuit { get; set; }
         public string Adi { get; set; }
         public DateTime Added { get; set; }
+
     }
 }

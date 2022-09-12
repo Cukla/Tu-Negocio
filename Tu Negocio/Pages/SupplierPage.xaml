@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Tu_Negocio.Pages.ClientsPage"
+    x:Class="Tu_Negocio.Pages.SupplierPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -73,13 +73,13 @@
                 Foreground="#727372" />
         </StackPanel>
         <ListView
-            Name="ClientList"
+            Name="SuppliersList"
             Width="250"
             HorizontalAlignment="Left"
-            SelectionChanged="ClientList_SelectionChanged"
+            SelectionChanged="SuppliersList_SelectionChanged"
             SelectionMode="Single">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local1:Client">
+                <DataTemplate x:DataType="local1:Supplier">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />

@@ -1,19 +1,30 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.UI.Xaml;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
 using Tu_Negocio.Entities;
+using File = System.IO.File;
 
 namespace Tu_Negocio.Json
 {
     internal class StorageManager
     {
+        public AppViewModel ViewModel => MainWindow.Current.ViewModel;
+
         string BussinesName = String.Empty;
         string BusinessPath = String.Empty;
         string DocPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string ClientsPath = String.Empty;
         string SupplierPath = String.Empty;
-        JsonSerializer serializer = new JsonSerializer();
+        string StoragePath = String.Empty;
+        public StorageManager()
+        {
+
+        }
 
         public StorageManager(string BussinesName)
         {
@@ -21,6 +32,7 @@ namespace Tu_Negocio.Json
             BusinessPath = DocPath + $@"\Tu Negocio\Business\";
             ClientsPath = DocPath + $@"\Tu Negocio\{BussinesName}\Clients\";
             SupplierPath = DocPath + $@"\Tu Negocio\{BussinesName}\Suppliers\";
+            StoragePath = DocPath + $@"\Tu Negocio\{BussinesName}\Storage\";
         }
 
         public void SaveClient(Client cli)
@@ -36,13 +48,26 @@ namespace Tu_Negocio.Json
             File.WriteAllText($"{SupplierPath}{sup.DNI}.json", output);
         }
 
-        public void SaveBussines(BusinessData bus)
+        public void SaveBussines()
         {
-            string output = JsonConvert.SerializeObject(bus);
+            string output = JsonConvert.SerializeObject(ViewModel.SelectedBusiness.Data);
             CheckIfFolderExist(BusinessPath);
-            File.WriteAllText($@"{BusinessPath}{bus.Name}.json", output);
+            File.WriteAllText($@"{BusinessPath}{ViewModel.SelectedBusiness.Data.Name}.json", output);
         }
         #region Business
+
+        public void GetSelectedBusiness(string SelectedBus)
+        {
+            ViewModel.SelectedBusiness.Data = new BusinessData();
+            if (SelectedBus != "No Business Selected")
+            {
+                string jsonContent = File.ReadAllText($"{BusinessPath}/{SelectedBus}.json");
+                ViewModel.SelectedBusiness.Data = JsonConvert.DeserializeObject<BusinessData>(jsonContent);
+                ViewModel.SelectedBusiness.Clients = GetClientsInBusiness();
+                ViewModel.SelectedBusiness.Suppliers = GetSuppliersInBusiness();
+            }
+        }
+
         public List<BusinessData> ReadAllBusiness()
         {
             List<BusinessData> business = new List<BusinessData>();
@@ -67,6 +92,105 @@ namespace Tu_Negocio.Json
             return clients;
         }
 
+        public List<Supplier> GetSuppliersInBusiness()
+        {
+            List<Supplier> suppliers = new List<Supplier>();
+            foreach (string file in GetAllFilesInDir(SupplierPath, "*.json"))
+            {
+                string jsonContent = File.ReadAllText(file);
+                Supplier data = JsonConvert.DeserializeObject<Supplier>(jsonContent);
+                suppliers.Add(data);
+            }
+            return suppliers;
+        }
+        #region Storage
+        public void CreateStorageFile(Product pro)
+        {
+            string content = $"{pro.ID},{pro.Name},{pro.Price},{pro.Cost},{pro.Barcode},{pro.Description},{pro.Atributes},{pro.Amount}";
+            File.WriteAllText($@"{StoragePath}\{pro.Name}_{pro.ID}.csv", content);
+            File.WriteAllText($@"{StoragePath}\{pro.Name}_{pro.ID}.txt", pro.Amount.ToString());
+        }
+
+        public void ModifyStorage(Product pro)
+        {
+            CheckIfFolderExist(StoragePath);
+            File.WriteAllText($@"{StoragePath}\{pro.Name}_{pro.ID}.txt", pro.Amount.ToString());
+        }
+
+        public int LoadStorage(Product pro)
+        {
+            CheckIfFolderExist(StoragePath);
+            return int.Parse(File.ReadAllText($@"{StoragePath}\{pro.Name}_{pro.ID}.txt"));
+        }
+
+        public Product LoadProduct(string proName)
+        {
+            CheckIfFolderExist(StoragePath);
+            Product pro = new Product();
+            using (var reader = new StreamReader($@"{StoragePath}\{proName}.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+
+                    pro = new Product
+                    {
+                        ID = int.Parse(values[0]),
+                        Name = values[1],
+                        Price = decimal.Parse(values[2]),
+                        Cost = decimal.Parse(values[3]),
+                        Barcode = values[4],
+                        Description = values[5],
+                        Atributes = values[6]
+                    };
+                }
+
+            }
+            pro.Amount = int.Parse(File.ReadAllText($@"{StoragePath}\{proName}.txt"));
+            return pro;
+        }
+        #endregion
+
+        #endregion
+        #region Settings file
+        public void CreateSettingsFile()
+        {
+            Settings set = new Settings { SelectedBusinessName = "No Business Selected", Categories = new List<string>() };
+            string output = JsonConvert.SerializeObject(set);
+            CheckIfFolderExist($"{DocPath}/Tu Negocio/");
+            File.WriteAllText($"{DocPath}/Tu Negocio/settings.json", output);
+        }
+        public bool ReadSettingsFile(ref Settings settings)
+        {
+            try
+            {
+                string jsonContent = File.ReadAllText($"{DocPath}/Tu Negocio/settings.json");
+                settings = JsonConvert.DeserializeObject<Settings>(jsonContent);
+                settings.Categories = ReadCategories();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public void ModifySettingsFile(ref Settings settings)
+        {
+            string output = JsonConvert.SerializeObject(settings);
+            CheckIfFolderExist($"{DocPath}/Tu Negocio/");
+            File.WriteAllText($"{DocPath}/Tu Negocio/settings.json", output);
+        }
+
+        public void WriteCategories(List<string> categories)
+        {
+            File.WriteAllLines($"{DocPath}/Tu Negocio/categories.txt", categories);
+        }
+
+        public List<string> ReadCategories()
+        {
+            return File.ReadAllLines($"{DocPath}/Tu Negocio/categories.txt").ToList();
+        }
         #endregion
         #region Utility functions
         private void CheckIfFolderExist(string path)
@@ -80,14 +204,18 @@ namespace Tu_Negocio.Json
 
         private List<string> GetAllFilesInDir(string path, string type)
         {
-            DirectoryInfo d = new DirectoryInfo(path);
-            List<string> FileNames = new List<string>();
-            FileInfo[] Files = d.GetFiles(type);
+            try
+            {
+                DirectoryInfo d = new DirectoryInfo(path);
+                List<string> FileNames = new List<string>();
+                FileInfo[] Files = d.GetFiles(type);
 
-            foreach (FileInfo file in Files)
-                FileNames.Add(file.FullName);
+                foreach (FileInfo file in Files)
+                    FileNames.Add(file.FullName);
 
-            return FileNames;
+                return FileNames;
+            }
+            catch { return new List<string>(); }
         }
 
         #endregion

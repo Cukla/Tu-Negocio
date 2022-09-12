@@ -15,25 +15,62 @@
             SelectionChanged="MainNv_SelectionChanged">
             <NavigationView.HeaderTemplate>
                 <DataTemplate>
-                    <StackPanel Height="30" Orientation="Horizontal">
+                    <StackPanel Height="50" Orientation="Horizontal">
                         <Button
                             Name="OpenClientDialog"
+                            Height="40"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
+                            Background="#009c40"
                             Click="OpenClientDialog_Click"
-                            Content="Nuevo cliente" />
+                            Content="Nuevo cliente"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="White" />
                         <Button
                             Name="OpenBusinessDialog"
+                            Height="40"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
+                            Background="#009c40"
                             Click="OpenBusinessDialog_Click"
-                            Content="Agregar otro negocio" />
+                            Content="Agregar otro negocio"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="White" />
                         <Button
                             Name="OpenProviderDialog"
+                            Height="40"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
+                            Background="#009c40"
                             Click="OpenProviderDialog_Click"
-                            Content="Nuevo proveedor" />
+                            Content="Nuevo proveedor"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="White" />
+                        <Button
+                            Name="OpenCategoryDialog"
+                            Height="40"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Background="#009c40"
+                            Click="OpenCategoryDialog_Click"
+                            Content="Nueva categoría"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="White" />
+                        <Button
+                            Name="OpenProductDialog"
+                            Height="40"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Background="#009c40"
+                            Click="OpenProductDialog_Click"
+                            Content="Nuevo producto"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="White" />
                     </StackPanel>
                 </DataTemplate>
             </NavigationView.HeaderTemplate>
@@ -55,6 +92,10 @@
                     Content="Ventas"
                     Icon="Shop"
                     Tag="Tu_Negocio.Pages.SalesPage" />
+                <NavigationViewItem
+                    Content="Proveedores"
+                    Icon="Trim"
+                    Tag="Tu_Negocio.Pages.SupplierPage" />
             </NavigationView.MenuItems>
             <Frame x:Name="contentFrame" />
         </NavigationView>
@@ -63,8 +104,8 @@
             x:Name="RegClientDialog"
             Width="400"
             HorizontalAlignment="Right"
-            Background="#dbdbdb"
-            Visibility="Visible">
+            Background="White"
+            Visibility="Collapsed">
             <ScrollViewer>
                 <StackPanel>
                     <TextBlock
@@ -190,10 +231,14 @@
                         TextWrapping="Wrap" />
                     <Button
                         Name="CommitClient"
-                        Margin="10"
+                        Width="300"
+                        Height="40"
+                        Margin="20"
                         HorizontalAlignment="Center"
                         Click="CommitClient_Click"
-                        Content="Crear cliente" />
+                        Content="Crear cliente"
+                        FontSize="16"
+                        FontWeight="Bold" />
                 </StackPanel>
             </ScrollViewer>
             <Button
@@ -213,7 +258,7 @@
             x:Name="RegBusinessDialog"
             Width="400"
             HorizontalAlignment="Right"
-            Background="#dbdbdb"
+            Background="White"
             Visibility="Collapsed">
             <ScrollViewer>
                 <StackPanel>
@@ -349,10 +394,14 @@
                         PlaceholderText="Seleccione la fundación del negocio" />
                     <Button
                         Name="CommitBussines"
-                        Margin="10"
+                        Width="300"
+                        Height="40"
+                        Margin="20"
                         HorizontalAlignment="Center"
                         Click="CommitBussines_Click"
-                        Content="Crear negocio" />
+                        Content="Crear negocio"
+                        FontSize="16"
+                        FontWeight="Bold" />
                 </StackPanel>
             </ScrollViewer>
             <Button
@@ -372,8 +421,8 @@
             x:Name="RegProviderDialog"
             Width="400"
             HorizontalAlignment="Right"
-            Background="#dbdbdb"
-            Visibility="Visible">
+            Background="White"
+            Visibility="Collapsed">
             <ScrollViewer>
                 <StackPanel>
                     <TextBlock
@@ -499,10 +548,14 @@
                         TextWrapping="Wrap" />
                     <Button
                         Name="CommitProvider"
-                        Margin="10"
+                        Width="300"
+                        Height="40"
+                        Margin="20"
                         HorizontalAlignment="Center"
                         Click="CommitProvider_Click"
-                        Content="Crear proveedor" />
+                        Content="Crear proveedor"
+                        FontSize="16"
+                        FontWeight="Bold" />
                 </StackPanel>
             </ScrollViewer>
             <Button
@@ -514,6 +567,218 @@
                 VerticalAlignment="Top"
                 Background="Blue"
                 Click="HidePDialogBtn_Click"
+                Content="x"
+                CornerRadius="100"
+                Foreground="White" />
+        </Grid>
+        <Grid
+            Name="AddCategoryDialog"
+            Width="400"
+            HorizontalAlignment="Right"
+            Background="White"
+            Visibility="Collapsed">
+            <StackPanel>
+                <TextBlock
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#626663"
+                    Text="Crear categoría" />
+                <TextBlock
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    FontSize="14"
+                    Foreground="#626663"
+                    Text="Nombre de la categoría" />
+                <TextBox
+                    Name="CategoryNameTb"
+                    Width="300"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    AcceptsReturn="True"
+                    Background="White"
+                    FontWeight="Bold"
+                    Foreground="#626663"
+                    PlaceholderForeground="#626663"
+                    PlaceholderText="Escribe el nombre de la categoría"
+                    TextWrapping="Wrap" />
+                <Button
+                    Name="CommitCategory"
+                    Width="300"
+                    Height="40"
+                    Margin="20"
+                    HorizontalAlignment="Center"
+                    Click="CommitCategory_Click"
+                    Content="Crear categoría"
+                    FontSize="16"
+                    FontWeight="Bold" />
+            </StackPanel>
+            <Button
+                Name="HideCaDialogBtn"
+                Width="20"
+                Height="25"
+                Margin="5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="Blue"
+                Click="HideCaDialogBtn_Click"
+                Content="x"
+                CornerRadius="100"
+                Foreground="White" />
+        </Grid>
+        <Grid
+            x:Name="RegProDialog"
+            Width="400"
+            HorizontalAlignment="Right"
+            Background="White"
+            Visibility="Visible">
+            <ScrollViewer>
+                <StackPanel>
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        FontSize="18"
+                        Foreground="#626663"
+                        Text="Nuevo producto" />
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#626663"
+                        Text="Nombre" />
+                    <TextBox
+                        Name="ProNameTb"
+                        Width="300"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="White"
+                        FontWeight="Bold"
+                        Foreground="#626663"
+                        PlaceholderForeground="#626663"
+                        PlaceholderText="Coloque el nombre" />
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#626663"
+                        Text="Código de barras" />
+                    <TextBox
+                        Name="ProCodTb"
+                        Width="300"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="White"
+                        FontWeight="Bold"
+                        Foreground="#626663"
+                        PlaceholderForeground="#626663"
+                        PlaceholderText="Escribalo o escanéalo" />
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#626663"
+                        Text="Cantidad disponible" />
+                    <NumberBox
+                        Name="ProDisAmountTb"
+                        Width="300"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="White"
+                        FontWeight="Bold"
+                        Foreground="#626663"
+                        PlaceholderText="Escriba la cantidad disponible"
+                        SpinButtonPlacementMode="Inline"
+                        Value="1" />
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#626663"
+                        Text="Costo unitario" />
+                    <NumberBox
+                        Name="ProCostTb"
+                        Width="300"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="White"
+                        FontWeight="Bold"
+                        Foreground="#626663"
+                        PlaceholderText="Valor que pagas al proveedor por el producto"
+                        SpinButtonPlacementMode="Hidden"
+                        Value="0" />
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#626663"
+                        Text="Precio" />
+                    <NumberBox
+                        Name="ProPriceTb"
+                        Width="300"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="White"
+                        FontWeight="Bold"
+                        Foreground="#626663"
+                        PlaceholderText="Escriba la cantidad disponible"
+                        SpinButtonPlacementMode="Hidden"
+                        Value="0" />
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#626663"
+                        Text="Categoría" />
+                    <TextBox
+                        Name="ProCatTb"
+                        Width="300"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="White"
+                        FontWeight="Bold"
+                        Foreground="#626663"
+                        PlaceholderForeground="#626663"
+                        PlaceholderText="Buscar categoría" />
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#626663"
+                        Text="Descipción" />
+                    <TextBox
+                        Name="ProDesTb"
+                        Width="300"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        AcceptsReturn="True"
+                        Background="White"
+                        FontWeight="Bold"
+                        Foreground="#626663"
+                        PlaceholderForeground="#626663"
+                        PlaceholderText="Escriba una descipción"
+                        TextWrapping="Wrap" />
+                    <Button
+                        Name="CommitProduct"
+                        Width="300"
+                        Height="40"
+                        Margin="20"
+                        HorizontalAlignment="Center"
+                        Click="CommitProvider_Click"
+                        Content="Crear producto"
+                        FontSize="16"
+                        FontWeight="Bold" />
+
+                </StackPanel>
+            </ScrollViewer>
+            <Button
+                Name="HideProDialogBtn"
+                Width="20"
+                Height="25"
+                Margin="5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="Blue"
+                Click="HideProDialogBtn_Click"
                 Content="x"
                 CornerRadius="100"
                 Foreground="White" />
