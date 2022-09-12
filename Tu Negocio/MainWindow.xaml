@@ -729,7 +729,7 @@
                         FontSize="14"
                         Foreground="#626663"
                         Text="Categoría" />
-                    <TextBox
+                    <AutoSuggestBox
                         Name="ProCatTb"
                         Width="300"
                         Margin="5"
@@ -737,8 +737,9 @@
                         Background="White"
                         FontWeight="Bold"
                         Foreground="#626663"
-                        PlaceholderForeground="#626663"
-                        PlaceholderText="Buscar categoría" />
+                        PlaceholderText="Buscar categoría"
+                        SuggestionChosen="ProCatTb_SuggestionChosen"
+                        TextChanged="ProCatTb_TextChanged" />
                     <TextBlock
                         Margin="5"
                         HorizontalAlignment="Center"
@@ -763,7 +764,7 @@
                         Height="40"
                         Margin="20"
                         HorizontalAlignment="Center"
-                        Click="CommitProvider_Click"
+                        Click="CommitProduct_Click"
                         Content="Crear producto"
                         FontSize="16"
                         FontWeight="Bold" />

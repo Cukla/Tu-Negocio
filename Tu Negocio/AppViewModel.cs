@@ -15,7 +15,7 @@ namespace Tu_Negocio
         }
 
         // All common app data
-        private Business selectedBusiness = new Business { Data = new BusinessData() };
+        private Business selectedBusiness = new Business { Data = new BusinessData(), Inventory = new List<Product>() };
         public Business SelectedBusiness
         {
             get { return selectedBusiness; }

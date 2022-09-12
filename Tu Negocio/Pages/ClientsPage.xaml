@@ -89,7 +89,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Ellipse
+                        <PersonPicture
                             x:Name="Ellipse"
                             Grid.RowSpan="2"
                             Width="32"
@@ -97,7 +97,7 @@
                             Margin="6"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+                            DisplayName="{x:Bind Name}" />
                         <TextBlock
                             Grid.Column="1"
                             Margin="12,6,0,0"

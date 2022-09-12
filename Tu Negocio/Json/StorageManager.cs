@@ -1,11 +1,8 @@
-﻿using Microsoft.UI.Xaml;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using Tu_Negocio.Entities;
 using File = System.IO.File;
 
@@ -106,6 +103,7 @@ namespace Tu_Negocio.Json
         #region Storage
         public void CreateStorageFile(Product pro)
         {
+            CheckIfFolderExist(StoragePath);
             string content = $"{pro.ID},{pro.Name},{pro.Price},{pro.Cost},{pro.Barcode},{pro.Description},{pro.Atributes},{pro.Amount}";
             File.WriteAllText($@"{StoragePath}\{pro.Name}_{pro.ID}.csv", content);
             File.WriteAllText($@"{StoragePath}\{pro.Name}_{pro.ID}.txt", pro.Amount.ToString());

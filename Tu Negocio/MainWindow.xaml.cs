@@ -7,6 +7,8 @@ using WinRT.Interop;
 using Tu_Negocio.Entities;
 using Tu_Negocio.Json;
 using Tu_Negocio.Pages;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Tu_Negocio
 {
@@ -103,9 +105,10 @@ namespace Tu_Negocio
             DateTimeOffset offset = (DateTimeOffset)BFundDateDp.Date;
             bus.Data.FundationDate = offset.UtcDateTime;
 
+            ViewModel.SelectedBusiness = bus;
+
             dataStorage.SaveBussines();
 
-            ViewModel.SelectedBusiness = bus;
             settings.SelectedBusinessName = bus.Data.Name;
             SetBusiness();
             dataStorage.ModifySettingsFile(ref settings);
@@ -220,5 +223,52 @@ namespace Tu_Negocio
             RegProDialog.Visibility = Visibility.Collapsed;
         }
 
+        private void CommitProduct_Click(object sender, RoutedEventArgs e)
+        {
+            Product product = new Product();
+
+            product.Name = ProNameTb.Text;
+            product.ID = ViewModel.SelectedBusiness.Inventory.Count();
+            product.Barcode = ProCodTb.Text;
+            product.Price = decimal.Parse(ProPriceTb.Text);
+            product.Cost = decimal.Parse(ProCostTb.Text);
+            product.Description = ProDesTb.Text;
+            product.Atributes = "Not implemented";
+            product.Amount = int.Parse(ProDisAmountTb.Text);
+            dataStorage.CreateStorageFile(product);
+        }
+
+        #region auto suggest
+        private void ProCatTb_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                var suitableItems = new List<string>();
+                var splitText = sender.Text.ToLower().Split(" ");
+                foreach (var cat in settings.Categories)
+                {
+                    var found = splitText.All((key) =>
+                    {
+                        return cat.ToLower().Contains(key);
+                    });
+                    if (found)
+                    {
+                        suitableItems.Add(cat);
+                    }
+                }
+                if (suitableItems.Count == 0)
+                {
+                    suitableItems.Add("No results found");
+                }
+                sender.ItemsSource = suitableItems;
+            }
+
+        }
+
+        private void ProCatTb_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            ProCatTb.Text = args.SelectedItem.ToString();
+        }
+        #endregion
     }
 }
