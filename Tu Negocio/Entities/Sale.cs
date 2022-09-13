@@ -4,7 +4,7 @@ namespace Tu_Negocio.Entities
 {
     public struct Sale
     {
-        public Client Client { get; set; }
+        public string ClientDni { get; set; }
         public DateTime Date { get; set; }
         public decimal Value { get; set; }
         public string Name { get; set; }

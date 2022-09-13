@@ -32,6 +32,8 @@ namespace Tu_Negocio
             {
                 dataStorage = new StorageManager(settings.SelectedBusinessName);
                 dataStorage.GetSelectedBusiness(settings.SelectedBusinessName);
+                ProductsCb.ItemsSource = ViewModel.SelectedBusiness.Inventory;
+                SaleClientCb.ItemsSource = ViewModel.SelectedBusiness.Clients;
             }
             else
             {
@@ -49,6 +51,8 @@ namespace Tu_Negocio
         private void SetBusiness()
         {
             dataStorage = new StorageManager(settings.SelectedBusinessName);
+            ProductsCb.ItemsSource = ViewModel.SelectedBusiness.Inventory;
+            SaleClientCb.ItemsSource = ViewModel.SelectedBusiness.Clients;
         }
 
         private AppWindow GetAppWindowForCurrentWindow()
@@ -270,5 +274,35 @@ namespace Tu_Negocio
             ProCatTb.Text = args.SelectedItem.ToString();
         }
         #endregion
+
+        private void OpenSaleDialog_Click(object sender, RoutedEventArgs e)
+        {
+            AddSaleDialog.Visibility = Visibility.Visible;
+        }
+
+        private void CommitSale_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ProductsCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void PmCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void HideSaleDialog_Click(object sender, RoutedEventArgs e)
+        {
+            AddSaleDialog.Visibility = Visibility.Collapsed;
+        }
+
+        private void SaleClientCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

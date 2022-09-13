@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:Tu_Negocio"
+    xmlns:local1="using:Tu_Negocio.Entities"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid>
@@ -15,63 +16,70 @@
             SelectionChanged="MainNv_SelectionChanged">
             <NavigationView.HeaderTemplate>
                 <DataTemplate>
-                    <StackPanel Height="50" Orientation="Horizontal">
-                        <Button
-                            Name="OpenClientDialog"
-                            Height="40"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Background="#009c40"
-                            Click="OpenClientDialog_Click"
-                            Content="Nuevo cliente"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="White" />
-                        <Button
-                            Name="OpenBusinessDialog"
-                            Height="40"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Background="#009c40"
-                            Click="OpenBusinessDialog_Click"
-                            Content="Agregar otro negocio"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="White" />
-                        <Button
-                            Name="OpenProviderDialog"
-                            Height="40"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Background="#009c40"
-                            Click="OpenProviderDialog_Click"
-                            Content="Nuevo proveedor"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="White" />
-                        <Button
-                            Name="OpenCategoryDialog"
-                            Height="40"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Background="#009c40"
-                            Click="OpenCategoryDialog_Click"
-                            Content="Nueva categoría"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="White" />
-                        <Button
-                            Name="OpenProductDialog"
-                            Height="40"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Background="#009c40"
-                            Click="OpenProductDialog_Click"
-                            Content="Nuevo producto"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="White" />
-                    </StackPanel>
+                    <ScrollViewer HorizontalScrollMode="Enabled">
+                        <StackPanel Height="50" Orientation="Horizontal">
+                            <Button
+                                Name="OpenClientDialog"
+                                Height="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Background="#e8cd1e"
+                                Click="OpenClientDialog_Click"
+                                Content="Nuevo cliente"
+                                FontSize="16"
+                                Foreground="Black" />
+                            <Button
+                                Name="OpenBusinessDialog"
+                                Height="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Background="#e8cd1e"
+                                Click="OpenBusinessDialog_Click"
+                                Content="Agregar otro negocio"
+                                FontSize="16"
+                                Foreground="Black" />
+                            <Button
+                                Name="OpenProviderDialog"
+                                Height="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Background="#e8cd1e"
+                                Click="OpenProviderDialog_Click"
+                                Content="Nuevo proveedor"
+                                FontSize="16"
+                                Foreground="Black" />
+                            <Button
+                                Name="OpenCategoryDialog"
+                                Height="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Background="#e8cd1e"
+                                Click="OpenCategoryDialog_Click"
+                                Content="Nueva categoría"
+                                FontSize="16"
+                                Foreground="Black" />
+                            <Button
+                                Name="OpenProductDialog"
+                                Height="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Background="#e8cd1e"
+                                Click="OpenProductDialog_Click"
+                                Content="Nuevo producto"
+                                FontSize="16"
+                                Foreground="Black" />
+                            <Button
+                                Name="OpenSaleDialog"
+                                Height="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Background="#e8cd1e"
+                                Click="OpenSaleDialog_Click"
+                                Content="Nueva venta"
+                                FontSize="16"
+                                Foreground="Black" />
+                        </StackPanel>
+                    </ScrollViewer>
                 </DataTemplate>
             </NavigationView.HeaderTemplate>
             <NavigationView.MenuItems>
@@ -102,687 +110,929 @@
 
         <Grid
             x:Name="RegClientDialog"
-            Width="400"
+            Width="450"
             HorizontalAlignment="Right"
             Background="White"
+            BorderBrush="#454d54"
+            BorderThickness="2"
             Visibility="Collapsed">
             <ScrollViewer>
                 <StackPanel>
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="18"
-                        Foreground="#626663"
+                        FontSize="21"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Agregar Cliente" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Nombre" />
                     <TextBox
                         Name="CNameTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Coloque el nombre del cliente" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Numero de teléfono" />
                     <TextBox
                         Name="CtelTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Coloque el numero de teléfono" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="DNI" />
                     <TextBox
                         Name="CDniTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Coloque el DNI" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="CUIT" />
                     <TextBox
                         Name="CCuitTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="coloque el CUIT" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Dirección" />
                     <TextBox
                         Name="CDirTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="coloque la dirección" />
 
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Ciudad" />
                     <TextBox
                         Name="CCityTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="coloque la ciudad" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Información adicional" />
                     <TextBox
                         Name="CAdiTb"
-                        Width="300"
+                        Width="400"
+                        Height="90"
                         Margin="5"
                         HorizontalAlignment="Center"
                         AcceptsReturn="True"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Información adicional"
                         TextWrapping="Wrap" />
                     <Button
                         Name="CommitClient"
-                        Width="300"
+                        Width="400"
                         Height="40"
                         Margin="20"
                         HorizontalAlignment="Center"
+                        Background="#e8cd1e"
                         Click="CommitClient_Click"
                         Content="Crear cliente"
-                        FontSize="16"
-                        FontWeight="Bold" />
+                        FontSize="16" />
                 </StackPanel>
             </ScrollViewer>
             <Button
                 Name="HideCDialogBtn"
-                Width="20"
-                Height="25"
-                Margin="5"
+                Width="40"
+                Height="40"
+                Margin="15"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Background="Blue"
                 Click="HideCDialogBtn_Click"
-                Content="x"
-                CornerRadius="100"
-                Foreground="White" />
+                Foreground="White">
+                <SymbolIcon Foreground="Black" Symbol="Back" />
+            </Button>
         </Grid>
         <Grid
             x:Name="RegBusinessDialog"
-            Width="400"
+            Width="450"
             HorizontalAlignment="Right"
             Background="White"
+            BorderBrush="#454d54"
+            BorderThickness="2"
             Visibility="Collapsed">
             <ScrollViewer>
                 <StackPanel>
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="18"
-                        Foreground="#626663"
+                        FontSize="21"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Crear un nuevo negocio" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Nombre" />
                     <TextBox
                         Name="BNameTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Escribe el nombre" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Numero de celular" />
                     <TextBox
                         Name="BtelTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Escribe el numero" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Documento" />
                     <TextBox
                         Name="BDocTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Escribe el documento" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Dirección" />
                     <TextBox
                         Name="BDirTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Escribe la dirección" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Email" />
                     <TextBox
                         Name="BEmailTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Escribe la dirección email" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Ciudad" />
                     <TextBox
                         Name="BCityTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Escribe la ciudad" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Información adicional" />
                     <TextBox
                         Name="BAdiTb"
-                        Width="300"
+                        Width="400"
+                        Height="90"
                         Margin="5"
                         HorizontalAlignment="Center"
                         AcceptsReturn="True"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Escribe la información adicional"
                         TextWrapping="Wrap" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Fundación" />
                     <CalendarDatePicker
                         Name="BFundDateDp"
+                        Height="40"
+                        MinWidth="400"
+                        Margin="5"
                         HorizontalAlignment="Center"
+                        Foreground="#454d54"
                         PlaceholderText="Seleccione la fundación del negocio" />
                     <Button
                         Name="CommitBussines"
-                        Width="300"
+                        Width="400"
                         Height="40"
                         Margin="20"
                         HorizontalAlignment="Center"
+                        Background="#e8cd1e"
                         Click="CommitBussines_Click"
                         Content="Crear negocio"
-                        FontSize="16"
-                        FontWeight="Bold" />
+                        FontSize="16" />
                 </StackPanel>
             </ScrollViewer>
             <Button
                 Name="HideBDialogBtn"
-                Width="20"
-                Height="25"
-                Margin="5"
+                Width="40"
+                Height="40"
+                Margin="15"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Background="Blue"
                 Click="HideBDialogBtn_Click"
-                Content="x"
-                CornerRadius="100"
-                Foreground="White" />
+                Foreground="White">
+                <SymbolIcon Foreground="Black" Symbol="Back" />
+            </Button>
         </Grid>
         <Grid
             x:Name="RegProviderDialog"
-            Width="400"
+            Width="450"
             HorizontalAlignment="Right"
             Background="White"
+            BorderBrush="#454d54"
+            BorderThickness="2"
             Visibility="Collapsed">
             <ScrollViewer>
                 <StackPanel>
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="18"
-                        Foreground="#626663"
+                        FontSize="21"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Agregar proveedor" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Nombre" />
                     <TextBox
                         Name="PNameTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Coloque el nombre del proveedor" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Numero de teléfono" />
                     <TextBox
                         Name="PtelTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Coloque el numero de teléfono" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="DNI" />
                     <TextBox
                         Name="PDniTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Coloque el DNI" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="CUIT" />
                     <TextBox
                         Name="PCuitTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="coloque el CUIT" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Dirección" />
                     <TextBox
                         Name="PDirTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="coloque la dirección" />
 
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Ciudad" />
                     <TextBox
                         Name="PCityTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="coloque la ciudad" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Información adicional" />
                     <TextBox
                         Name="PAdiTb"
-                        Width="300"
+                        Width="400"
+                        Height="90"
                         Margin="5"
                         HorizontalAlignment="Center"
                         AcceptsReturn="True"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Información adicional"
                         TextWrapping="Wrap" />
                     <Button
                         Name="CommitProvider"
-                        Width="300"
+                        Width="400"
                         Height="40"
                         Margin="20"
                         HorizontalAlignment="Center"
+                        Background="#e8cd1e"
                         Click="CommitProvider_Click"
                         Content="Crear proveedor"
-                        FontSize="16"
-                        FontWeight="Bold" />
+                        FontSize="16" />
                 </StackPanel>
             </ScrollViewer>
             <Button
                 Name="HidePDialogBtn"
-                Width="20"
-                Height="25"
-                Margin="5"
+                Width="40"
+                Height="40"
+                Margin="15"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Background="Blue"
                 Click="HidePDialogBtn_Click"
-                Content="x"
-                CornerRadius="100"
-                Foreground="White" />
+                Foreground="White">
+                <SymbolIcon Foreground="Black" Symbol="Back" />
+            </Button>
         </Grid>
         <Grid
             Name="AddCategoryDialog"
-            Width="400"
+            Width="450"
             HorizontalAlignment="Right"
             Background="White"
+            BorderBrush="#454d54"
+            BorderThickness="2"
             Visibility="Collapsed">
             <StackPanel>
                 <TextBlock
+                    Width="400"
                     Margin="10"
                     HorizontalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#626663"
+                    FontSize="21"
+                    FontWeight="Bold"
+                    Foreground="#454d54"
                     Text="Crear categoría" />
                 <TextBlock
+                    Width="400"
                     Margin="5"
                     HorizontalAlignment="Center"
-                    FontSize="14"
-                    Foreground="#626663"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="#454d54"
                     Text="Nombre de la categoría" />
                 <TextBox
                     Name="CategoryNameTb"
-                    Width="300"
+                    Width="400"
+                    Height="40"
                     Margin="5"
                     HorizontalAlignment="Center"
                     AcceptsReturn="True"
                     Background="White"
-                    FontWeight="Bold"
-                    Foreground="#626663"
-                    PlaceholderForeground="#626663"
+                    BorderBrush="#454d54"
+                    Foreground="#454d54"
+                    PlaceholderForeground="#67737e"
                     PlaceholderText="Escribe el nombre de la categoría"
                     TextWrapping="Wrap" />
                 <Button
                     Name="CommitCategory"
-                    Width="300"
+                    Width="400"
                     Height="40"
                     Margin="20"
                     HorizontalAlignment="Center"
+                    Background="#e8cd1e"
                     Click="CommitCategory_Click"
                     Content="Crear categoría"
-                    FontSize="16"
-                    FontWeight="Bold" />
+                    FontSize="16" />
             </StackPanel>
             <Button
                 Name="HideCaDialogBtn"
-                Width="20"
-                Height="25"
-                Margin="5"
+                Width="40"
+                Height="40"
+                Margin="15"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Background="Blue"
                 Click="HideCaDialogBtn_Click"
-                Content="x"
-                CornerRadius="100"
-                Foreground="White" />
+                Foreground="White">
+                <SymbolIcon Foreground="Black" Symbol="Back" />
+            </Button>
         </Grid>
         <Grid
             x:Name="RegProDialog"
-            Width="400"
+            Width="450"
             HorizontalAlignment="Right"
             Background="White"
-            Visibility="Visible">
+            BorderBrush="#454d54"
+            BorderThickness="2"
+            Visibility="Collapsed">
             <ScrollViewer>
                 <StackPanel>
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="18"
-                        Foreground="#626663"
+                        FontSize="21"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Nuevo producto" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Nombre" />
                     <TextBox
                         Name="ProNameTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Coloque el nombre" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Código de barras" />
                     <TextBox
                         Name="ProCodTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Escribalo o escanéalo" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Cantidad disponible" />
                     <NumberBox
                         Name="ProDisAmountTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
                         PlaceholderText="Escriba la cantidad disponible"
                         SpinButtonPlacementMode="Inline"
                         Value="1" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Costo unitario" />
                     <NumberBox
                         Name="ProCostTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
                         PlaceholderText="Valor que pagas al proveedor por el producto"
                         SpinButtonPlacementMode="Hidden"
                         Value="0" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Precio" />
                     <NumberBox
                         Name="ProPriceTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
                         PlaceholderText="Escriba la cantidad disponible"
                         SpinButtonPlacementMode="Hidden"
                         Value="0" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Categoría" />
                     <AutoSuggestBox
                         Name="ProCatTb"
-                        Width="300"
+                        Width="400"
+                        Height="40"
                         Margin="5"
                         HorizontalAlignment="Center"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
                         PlaceholderText="Buscar categoría"
                         SuggestionChosen="ProCatTb_SuggestionChosen"
                         TextChanged="ProCatTb_TextChanged" />
                     <TextBlock
+                        Width="400"
                         Margin="5"
                         HorizontalAlignment="Center"
-                        FontSize="14"
-                        Foreground="#626663"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#454d54"
                         Text="Descipción" />
                     <TextBox
                         Name="ProDesTb"
-                        Width="300"
+                        Width="400"
+                        Height="90"
                         Margin="5"
                         HorizontalAlignment="Center"
                         AcceptsReturn="True"
                         Background="White"
-                        FontWeight="Bold"
-                        Foreground="#626663"
-                        PlaceholderForeground="#626663"
+                        BorderBrush="#454d54"
+                        Foreground="#454d54"
+                        PlaceholderForeground="#67737e"
                         PlaceholderText="Escriba una descipción"
                         TextWrapping="Wrap" />
                     <Button
                         Name="CommitProduct"
-                        Width="300"
+                        Width="400"
                         Height="40"
                         Margin="20"
                         HorizontalAlignment="Center"
+                        Background="#e8cd1e"
                         Click="CommitProduct_Click"
                         Content="Crear producto"
-                        FontSize="16"
-                        FontWeight="Bold" />
+                        FontSize="16" />
 
                 </StackPanel>
             </ScrollViewer>
             <Button
                 Name="HideProDialogBtn"
-                Width="20"
-                Height="25"
-                Margin="5"
+                Width="40"
+                Height="40"
+                Margin="15"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Background="Blue"
                 Click="HideProDialogBtn_Click"
-                Content="x"
-                CornerRadius="100"
-                Foreground="White" />
+                Foreground="Black">
+                <SymbolIcon Foreground="Black" Symbol="Back" />
+            </Button>
+        </Grid>
+        <Grid
+            Name="AddSaleDialog"
+            Width="450"
+            HorizontalAlignment="Right"
+            Background="White"
+            BorderBrush="#454d54"
+            BorderThickness="2"
+            Visibility="Visible">
+            <StackPanel>
+                <TextBlock
+                    Width="400"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    FontSize="21"
+                    FontWeight="Bold"
+                    Foreground="#454d54"
+                    Text="Nueva venta" />
+                <TextBlock
+                    Width="400"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="#454d54"
+                    Text="Producto vendido" />
+                <ComboBox
+                    Name="ProductsCb"
+                    Width="400"
+                    Height="40"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    Background="White"
+                    BorderBrush="#454d54"
+                    Foreground="#454d54"
+                    PlaceholderForeground="#67737e"
+                    PlaceholderText="Seleccione un producto"
+                    SelectionChanged="ProductsCb_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="local1:Product">
+                            <TextBlock Text="{x:Bind Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock
+                    Width="400"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="#454d54"
+                    Text="Fecha de la venta" />
+                <CalendarDatePicker
+                    Name="SaleDateDp"
+                    Height="40"
+                    MinWidth="400"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    Foreground="#454d54"
+                    PlaceholderText="Seleccione la fecha de la venta" />
+                <TextBlock
+                    Width="400"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="#454d54"
+                    Text="Metodo de pago" />
+                <ComboBox
+                    Name="PmCb"
+                    Width="400"
+                    Height="40"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    Background="White"
+                    BorderBrush="#454d54"
+                    Foreground="#454d54"
+                    PlaceholderForeground="#67737e"
+                    PlaceholderText="Seleccione el metodo de pago"
+                    SelectionChanged="PmCb_SelectionChanged">
+                    <x:String>Efectivo</x:String>
+                    <x:String>Tarjeta</x:String>
+                    <x:String>Transferencia bancaria</x:String>
+                    <x:String>Mercado Pago</x:String>
+                    <x:String>Otro</x:String>
+                </ComboBox>
+                <TextBlock
+                    Width="400"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="#454d54"
+                    Text="Agregar un cliente a la venta" />
+                <ComboBox
+                    Name="SaleClientCb"
+                    Width="400"
+                    Height="40"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    Background="White"
+                    BorderBrush="#454d54"
+                    Foreground="#454d54"
+                    PlaceholderForeground="#67737e"
+                    PlaceholderText="Seleccione un cliente"
+                    SelectionChanged="SaleClientCb_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="local1:Client">
+                            <TextBlock Text="{x:Bind Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button
+                    Name="CommitSale"
+                    Width="400"
+                    Height="40"
+                    Margin="20"
+                    HorizontalAlignment="Center"
+                    Background="#e8cd1e"
+                    Click="CommitSale_Click"
+                    Content="Confirmar venta"
+                    FontSize="16" />
+            </StackPanel>
+            <Button
+                Name="HideSaleDialog"
+                Width="40"
+                Height="40"
+                Margin="15"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="HideSaleDialog_Click"
+                Foreground="White">
+                <SymbolIcon Foreground="Black" Symbol="Back" />
+            </Button>
         </Grid>
     </Grid>
 

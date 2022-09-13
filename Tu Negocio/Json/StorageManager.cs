@@ -62,6 +62,7 @@ namespace Tu_Negocio.Json
                 ViewModel.SelectedBusiness.Data = JsonConvert.DeserializeObject<BusinessData>(jsonContent);
                 ViewModel.SelectedBusiness.Clients = GetClientsInBusiness();
                 ViewModel.SelectedBusiness.Suppliers = GetSuppliersInBusiness();
+                ViewModel.SelectedBusiness.Inventory = LoadAllProducts();
             }
         }
 
@@ -121,11 +122,21 @@ namespace Tu_Negocio.Json
             return int.Parse(File.ReadAllText($@"{StoragePath}\{pro.Name}_{pro.ID}.txt"));
         }
 
+        public List<Product> LoadAllProducts()
+        {
+            List<Product> pros = new List<Product>();
+            foreach (string file in GetAllFilesInDirShortName(StoragePath, "*.csv"))
+            {
+                pros.Add(LoadProduct(file));
+            }
+            return pros;
+        }
+
         public Product LoadProduct(string proName)
         {
             CheckIfFolderExist(StoragePath);
             Product pro = new Product();
-            using (var reader = new StreamReader($@"{StoragePath}\{proName}.csv"))
+            using (var reader = new StreamReader($@"{StoragePath}\{proName}"))
             {
                 while (!reader.EndOfStream)
                 {
@@ -145,7 +156,7 @@ namespace Tu_Negocio.Json
                 }
 
             }
-            pro.Amount = int.Parse(File.ReadAllText($@"{StoragePath}\{proName}.txt"));
+            pro.Amount = int.Parse(File.ReadAllText($@"{StoragePath}\{proName.Split(".")[0]}.txt"));
             return pro;
         }
         #endregion
@@ -210,6 +221,22 @@ namespace Tu_Negocio.Json
 
                 foreach (FileInfo file in Files)
                     FileNames.Add(file.FullName);
+
+                return FileNames;
+            }
+            catch { return new List<string>(); }
+        }
+
+        private List<string> GetAllFilesInDirShortName(string path, string type)
+        {
+            try
+            {
+                DirectoryInfo d = new DirectoryInfo(path);
+                List<string> FileNames = new List<string>();
+                FileInfo[] Files = d.GetFiles(type);
+
+                foreach (FileInfo file in Files)
+                    FileNames.Add(file.Name);
 
                 return FileNames;
             }
